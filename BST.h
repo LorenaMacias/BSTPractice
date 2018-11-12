@@ -4,6 +4,7 @@
 #ifndef BST_H
 #define BST_H
 #include <iostream>
+using namespace std;
 
 template <typename T>
 struct Node {
@@ -25,45 +26,105 @@ class BinarySearchTree {
         void preorderPrint(Node<T>* nodeptr);
         void inorderPrint(Node<T>* nodeptr);
         void postorderPrint(Node<T>* nodeptr);
+        T sum();
+        T sumRec(Node<T>* nodptr);
+        T siize();
+        T rsize(Node<T>* p);
     private:
         int size_;
         Node<T>* root_;
 };
+template <typename T>
+T BinarySearchTree<T>::siize(){
+  return rsize(root_);
+}
+template <typename T>
+T BinarySearchTree<T>::rsize(Node<T>* p){
+
+   if (p == nullptr) { return 0; }
+   return rsize(p->left) + rsize(p->right) + (p->left == nullptr && p->right == nullptr ? 1 : 0);
+
+   /*
+  T size;
+  if(p == nullptr) return 0;
+  size = size + rsize(p->left);
+  size = size + rsize(p->right);
+  return size;
+  */
+}
+
+template <typename T>
+T BinarySearchTree<T>::sum(){
+    return sumRec(root_);
+}
+template <typename T>
+T BinarySearchTree<T>::sumRec(Node<T>* nodeptr){
+    if(nodeptr == nullptr)
+      return 0;
+    return nodeptr->value + sumRec(nodeptr->left) + sumRec(nodeptr->right);
+}
+
 
 // Default constructor
 template <typename T>
 BinarySearchTree<T>::BinarySearchTree() {
-    // TO BE COMPLETED
+    size_= 0;
+    root_ = nullptr;
 }
 
 // Returns the maximum in the BST
 template <typename T>
 T BinarySearchTree<T>::getMinimum() {
-    // TO BE COMPLETED
+    if(root_ == nullptr)
+      return 0;
+    Node<T>* tmp = root_;
+    while(tmp->left != nullptr){
+      tmp = tmp->left;
+    }
+    return tmp->value;
 }
 
 // Returns the minimum in the BST
 template <typename T>
 T BinarySearchTree<T>::getMaximum() {
-    // TO BE COMPLETED
+    if(root_ == nullptr){
+      return 0;}
+    Node<T>* tmp = root_;
+    while(tmp->right != nullptr){
+        tmp = tmp->right;
+    }
+    return tmp->value;
 }
 
 // Prints the BST using an preorder traversal.
 template <typename T>
 void BinarySearchTree<T>::preorderPrint(Node<T>* nodeptr) {
-    // TO BE COMPLETED
+    if(nodeptr == nullptr){
+      return;
+    }
+    cout << nodeptr->value;
+    preorderPrint(nodeptr->left);
+    preorderPrint(nodeptr->right);
 }
 
 // Prints the BST using an inorder traversal.
 template <typename T>
 void BinarySearchTree<T>::inorderPrint(Node<T>* nodeptr) {
-    // TO BE COMPLETED
+    if(nodeptr == nullptr)
+      return;
+    inorderPrint(nodeptr->left);
+    cout << nodeptr->value;
+    inorderPrint(nodeptr->right);
 }
 
 // Prints the BST using an postorder traversal.
 template <typename T>
 void BinarySearchTree<T>::postorderPrint(Node<T>* nodeptr) {
-    // TO BE COMPLETED
+    if(nodeptr == nullptr)
+      return;
+    postorderPrint(nodeptr->left);
+    postorderPrint(nodeptr->right);
+    cout << nodeptr->value;
 }
 
 

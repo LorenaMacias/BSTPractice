@@ -13,10 +13,12 @@ int main() {
 
     BinarySearchTree<int> myTree;
 
+
     std::cout << "1. TESTING CONSTRUCTOR BinarySearchTree() ";
     assert(myTree.size() == 0);
     assert(myTree.root() == nullptr);
     std::cout << " -->PASSED" << std::endl;
+    numPassed++;
 
     myTree.insertVal(2);
     myTree.insertVal(1);
@@ -35,13 +37,15 @@ int main() {
     std::cout << "4. TESTING preorderPrint() ";
     myTree.preorderPrint(myTree.root());
 
-    std::cout << "5. TESTING inorderPrint() ";
+    std::cout << "\n5. TESTING inorderPrint() ";
     myTree.inorderPrint(myTree.root());
 
-    std::cout << "6. TESTING postorderPrint() ";
+    std::cout << "\n6. TESTING postorderPrint() ";
     myTree.postorderPrint(myTree.root());
 
-    std::cout << "PASSED " << numPassed << "/" << numTests << " TESTS" << std::endl;
+    std::cout << "\nPASSED " << numPassed << "/" << numTests << " TESTS" << std::endl;
+
+  //  std::cout << "blooooooop : " << myTree.siize() << endl;
 
     return 0;
 }
